@@ -16,27 +16,28 @@ namespace julieta.Controllers
         {
             _context = context;
         }
+        
         public IActionResult EfCoreSelectTest(string user)
         {
 
-            var account = _context.Accounts
+            var a1 = _context.Accounts
                 .FromSqlRaw("SELECT * FROM ACCOUNTS WHERE login={0}", user)
                 .FirstOrDefault();
 
             var sql = "SELECT * FROM ACCOUNTS WHERE login = '" + user + "'";
-            var account2 = _context.Accounts
+            var a2 = _context.Accounts
                 .FromSqlRaw(sql)
                 .FirstOrDefault();
 
-            var account3 = _context.Accounts
+            var a3 = _context.Accounts
                 .FromSqlRaw($"SELECT * FROM ACCOUNTS WHERE login = '{user}'")
                 .FirstOrDefault();
 
-            var account4 = _context.Accounts
+            var a4 = _context.Accounts
                 .FromSqlRaw("SELECT * FROM ACCOUNTS WHERE login = '" + user + "'")
                 .FirstOrDefault();
 
-            var account5 = _context.Accounts
+            var a5 = _context.Accounts
                 .FromSqlRaw("SELECT * FROM ACCOUNTS WHERE login = {0}", user)
                 .FirstOrDefault();
 
