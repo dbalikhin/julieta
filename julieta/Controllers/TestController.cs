@@ -1,5 +1,7 @@
-﻿using System.Linq;
+using System.Linq;
+using System.Net;
 using julieta.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -43,7 +45,7 @@ namespace julieta.Controllers
 
             return new OkResult();
         }
-        
+
         public IActionResult CookieTest()
         {
             Response.Cookies.Append(
