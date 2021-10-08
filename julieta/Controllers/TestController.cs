@@ -63,11 +63,19 @@ namespace julieta.Controllers
 
                 SqlCommand sqlCommand2 = new SqlCommand()
                 {
-                    CommandText = $"SELECT ProductId FROM Products WHERE ProductName = '{productNameId}' AND ProductCategory ='{productCategory}'",
+                    CommandText = "SELECT ProductId FROM Products WHERE ProductCategory ='" + productCategory + "'",
                     CommandType = CommandType.Text,
                 };
 
-                reader = sqlCommand2.ExecuteReader();
+                SqlDataReader reader2 = sqlCommand2.ExecuteReader();
+
+                SqlCommand sqlCommand3 = new SqlCommand()
+                {
+                    CommandText = $"SELECT ProductId FROM Products WHERE ProductCategory ='{productCategory}'",
+                    CommandType = CommandType.Text,
+                };
+
+                SqlDataReader reader3 = sqlCommand2.ExecuteReader();
             }
 
             return new OkResult();
