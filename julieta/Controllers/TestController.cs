@@ -43,6 +43,24 @@ namespace julieta.Controllers
 
             return new OkResult();
         }
+        
+        public IActionResult CookieTest()
+        {
+            Response.Cookies.Append(
+                "COOKIE_NAME",
+                "COOKIE_VALUE",
+                new CookieOptions()
+                {
+                    Path = "/",
+                    HttpOnly = false,
+                    Secure = false
+                }
+            );
+
+            Cookie cookie = new Cookie("SecretCookie", "SecretValue");
+            
+            return new OkResult();
+        }
     }
 
 
