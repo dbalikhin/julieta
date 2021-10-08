@@ -18,6 +18,7 @@ namespace julieta.Controllers
         {
             _context = context;
         }
+        
         public IActionResult EfCoreSelectTest(string user)
         {
 
