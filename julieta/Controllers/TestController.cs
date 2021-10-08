@@ -48,18 +48,26 @@ namespace julieta.Controllers
         }
 
         //[System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA3001:Review code for SQL injection vulnerabilities", Justification = "<Pending>")]
-        public IActionResult SqlTest(string productName)
+        public IActionResult SqlTest(string productName, string productCategory)
         {
             int productNameId = int.Parse(productName);
             using (SqlConnection connection = new SqlConnection("dummyconnectionstring"))
             {
                 SqlCommand sqlCommand = new SqlCommand()
                 {
-                    CommandText = "SELECT ProductId FROM Products WHERE ProductName = '" + productNameId + "'",
+                    CommandText = "SELECT ProductId FROM Products WHERE ProductName = '" + productNameId + "' AND ProductCategory ='" + productCategory + "'",
                     CommandType = CommandType.Text,
                 };
 
                 SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                SqlCommand sqlCommand2 = new SqlCommand()
+                {
+                    CommandText = $"SELECT ProductId FROM Products WHERE ProductName = '{productNameId}' AND ProductCategory ='{productCategory}'",
+                    CommandType = CommandType.Text,
+                };
+
+                reader = sqlCommand2.ExecuteReader();
             }
 
             return new OkResult();
