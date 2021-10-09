@@ -1,3 +1,5 @@
+﻿using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using julieta.Data;
@@ -18,7 +20,6 @@ namespace julieta.Controllers
         {
             _context = context;
         }
-        
         public IActionResult EfCoreSelectTest(string user)
         {
 
@@ -42,6 +43,40 @@ namespace julieta.Controllers
             var a5 = _context.Accounts
                 .FromSqlRaw("SELECT * FROM ACCOUNTS WHERE login = {0}", user)
                 .FirstOrDefault();
+
+            return new OkResult();
+        }
+
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA3001:Review code for SQL injection vulnerabilities", Justification = "<Pending>")]
+        public IActionResult SqlTest(string productName, string productCategory)
+        {
+            int productNameId = int.Parse(productName);
+            using (SqlConnection connection = new SqlConnection("dummyconnectionstring"))
+            {
+                SqlCommand sqlCommand = new SqlCommand()
+                {
+                    CommandText = "SELECT ProductId FROM Products WHERE ProductName = '" + productNameId + "' AND ProductCategory ='" + productCategory + "'",
+                    CommandType = CommandType.Text,
+                };
+
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                SqlCommand sqlCommand2 = new SqlCommand()
+                {
+                    CommandText = "SELECT ProductId FROM Products WHERE ProductCategory ='" + productCategory + "'",
+                    CommandType = CommandType.Text,
+                };
+
+                SqlDataReader reader2 = sqlCommand2.ExecuteReader();
+
+                SqlCommand sqlCommand3 = new SqlCommand()
+                {
+                    CommandText = $"SELECT ProductId FROM Products WHERE ProductCategory ='{productCategory}'",
+                    CommandType = CommandType.Text,
+                };
+
+                SqlDataReader reader3 = sqlCommand2.ExecuteReader();
+            }
 
             return new OkResult();
         }
