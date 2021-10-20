@@ -212,15 +212,15 @@ namespace julieta.Controllers
                 // SAFE
                 // Should trigger Roslyn CA2100
                 var spName = "sp_NormalStuff";
-                GetDatatable(connection, spName, null);
+                var r1 =GetDatatable(connection, spName, null);
 
                 // VULNERABLE - allow to use any sp
-                GetDatatable(connection, spNameInput, null);
+                var r2= GetDatatable(connection, spNameInput, null);
 
                 if (spNameInput == "sp_NormalStuff" || spNameInput == "sp_AlsoNormalStuff")
                 {
                     // SAFE
-                    GetDatatable(connection, spNameInput, null);
+                    var r3 = GetDatatable(connection, spNameInput, null);
                 }
 
             }
@@ -229,6 +229,26 @@ namespace julieta.Controllers
         }
 
         private DataTable GetDatatable(SqlConnection connection, string procName, Hashtable parms)
+        {
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand();
+            SqlDataAdapter da = new SqlDataAdapter();
+            cmd.CommandText = procName;
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = connection;
+            if (parms.Count > 0)
+            {
+                foreach (DictionaryEntry de in parms)
+                {
+                    cmd.Parameters.AddWithValue(de.Key.ToString(), de.Value);
+                }
+            }
+            da.SelectCommand = cmd;
+            da.Fill(dt);
+            return dt;
+        }
+
+        private DataTable UnusedGetDatatable(SqlConnection connection, string procName, Hashtable parms)
         {
             DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand();
