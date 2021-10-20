@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
 using julieta.Data;
@@ -208,9 +209,33 @@ namespace julieta.Controllers
                 // VULNERABLE: productCategoryIdStrInput and productCategoryNameInput
                 twoVulnsSqlCommand.ExecuteReader();
 
+                // SAFE
+                // Should trigger Roslyn CA2100
+                GetDatatable(connection, productCategoryNameInput, null);
+
             }
 
             return new OkResult();
+        }
+
+        private DataTable GetDatatable(SqlConnection connection, string procName, Hashtable parms)
+        {
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand();
+            SqlDataAdapter da = new SqlDataAdapter();
+            cmd.CommandText = procName;
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = connection;
+            if (parms.Count > 0)
+            {
+                foreach (DictionaryEntry de in parms)
+                {
+                    cmd.Parameters.AddWithValue(de.Key.ToString(), de.Value);
+                }
+            }
+            da.SelectCommand = cmd;
+            da.Fill(dt);
+            return dt;
         }
 
 
