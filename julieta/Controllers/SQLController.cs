@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
@@ -22,60 +23,123 @@ namespace julieta.Controllers
         {
             _context = context;
         }
-        public IActionResult EfCoreInjectionTest(string user)
+        public IActionResult EfCoreInjectionBasic(string user)
         {
-            // Raw Sql Same Line
-            // VULNERABLE
+            // Raw Sql Same - one line
+            // SAFE
             _context.Accounts
-                .FromSqlRaw("SELECT * FROM ACCOUNTS WHERE login={0}", user)
-                .FirstOrDefault();
+                .FromSqlRaw("SELECT * FROM ACCOUNTS WHERE login={0}", user);
 
-            // Raw SQL multi-lines lines
-            // VULNERABLE
+            // ExecuteSqlRaw - one line
+            // SAFE
+            _context.Database.ExecuteSqlRaw("SELECT * FROM ACCOUNTS WHERE login={0}", user);
+
+            // Raw SQL multi line
+            // VULNERABLE?
             _context.Accounts
                 .FromSqlRaw(
                     "SELECT * FROM ACCOUNTS WHERE login={0}",
                     user
-                )
-                .FirstOrDefault();
+                );
 
-            // Raw Sql with a sql string
+            // ExecuteSqlRaw - multi line
+            // SAFE
+            _context.Database.ExecuteSqlRaw(
+                "SELECT * FROM ACCOUNTS WHERE login={0}",
+                user
+            );
+
+            // Raw Sql / ExecuteSqlRaw with a sql string
             // VULNERABLE
             var concatSql = "SELECT * FROM ACCOUNTS WHERE login = '" + user + "'";
             _context.Accounts
-                .FromSqlRaw(concatSql)
-                .FirstOrDefault();
+                .FromSqlRaw(concatSql);
+            // VULNERABLE too
+            _context.Database.ExecuteSqlRaw(concatSql);
 
-            // Raw Sql with a format sql str
+            // Raw Sql / ExecuteSqlRaw with a format sql str
             // VULNERABLE
             var formatStringSql = string.Format("SELECT * FROM ACCOUNTS WHERE login = '{0}'", user);
             _context.Accounts
-                .FromSqlRaw(formatStringSql)
-                .FirstOrDefault();
+                .FromSqlRaw(formatStringSql);
+            // VULNERABLE too
+            _context.Database.ExecuteSqlRaw(formatStringSql);
 
-            // Raw Sql with an interpolated sql str
+            // Raw Sql / ExecuteSqlRaw with an interpolated sql str
             // VULNERABLE?
             var interpolatedStringSql = $"SELECT * FROM ACCOUNTS WHERE login = '{user}'";
             _context.Accounts
-                .FromSqlRaw(interpolatedStringSql)
-                .FirstOrDefault();
+                .FromSqlRaw(interpolatedStringSql);
+            // VULNERABLE too
+            _context.Database.ExecuteSqlRaw(interpolatedStringSql);
 
-            // Raw Sql with an interpolated sql str - one-liner
+            // Raw Sql / ExecuteSqlRaw with an interpolated sql str - one-liner
             // VULNERABLE?
             _context.Accounts
-                .FromSqlRaw($"SELECT * FROM ACCOUNTS WHERE login = '{user}'")
-                .FirstOrDefault();
+                .FromSqlRaw($"SELECT * FROM ACCOUNTS WHERE login = '{user}'");
+            _context.Database.ExecuteSqlRaw(interpolatedStringSql);
 
-            
-            // Interpolated Sql with an interpolated sql str
+
+            // Interpolated Sql / ExecuteSqlInterpolated with an interpolated sql str
             // SAFE
             _context.Accounts
-                .FromSqlInterpolated($"SELECT * FROM ACCOUNTS WHERE login = '{user}'")
-                .FirstOrDefault();
+                .FromSqlInterpolated($"SELECT * FROM ACCOUNTS WHERE login = '{user}'");
+            // SAFE
+            _context.Database.ExecuteSqlInterpolated($"SELECT * FROM ACCOUNTS WHERE login = '{user}'");
+
+            // Sql Raw / ExecuteSqlRaw - Implicit Db Parameter
+            // SAFE
+            _context.Accounts
+                .FromSqlRaw("SELECT * FROM ACCOUNTS WHERE login = {0}", user);
+            // SAFE
+            _context.Database.ExecuteSqlRaw("SELECT * FROM ACCOUNTS WHERE login = {0}", user);
+
+            // Interpolated Sql - Implicit Db Parameter
+            // SAFE
+            _context.Accounts
+                .FromSqlInterpolated($"SELECT * FROM ACCOUNTS WHERE login = {user}");
+            // SAFE
+            _context.Database.ExecuteSqlInterpolated($"SELECT * FROM ACCOUNTS WHERE login = {user}");
 
 
             return new OkResult();
         }
+
+        public IActionResult EfCoreInjectionAdvanced(string user, int userId, Guid guid, string ageInput)
+        {
+            int age = 0;
+            int.TryParse(ageInput, out age);
+            string guidStr = guid.ToString();
+
+            var concatSql = "SELECT * FROM ACCOUNTS WHERE " +
+                            "login='" + user + "' AND " +
+                            "userId='" + userId + " AND " +
+                            "guid='" + guidStr + "' AND " +
+                            "age=" + age + "";
+            // VULNERABLE
+            _context.Accounts
+                .FromSqlRaw(concatSql);
+            // VULNERABLE
+            _context.Database
+                .ExecuteSqlRaw(concatSql);
+
+            var formatStringSql = string.Format("SELECT * FROM ACCOUNTS WHERE login = '{0}' AND userId = {1} AND guid='{2}' AND age={3}", user, userId, guidStr, age);
+            // VULNERABLE
+            _context.Accounts
+                .FromSqlRaw(formatStringSql);
+            // VULNERABLE
+            _context.Database.ExecuteSqlRaw(formatStringSql);
+
+            var interpolatedStringSql = $"SELECT* FROM ACCOUNTS WHERE login = '{user}' AND userId = { userId } AND guid = '{guidStr}' AND age = { age }";
+            _context.Accounts
+                .FromSqlRaw(interpolatedStringSql);
+            // VULNERABLE too
+            _context.Database.ExecuteSqlRaw(interpolatedStringSql);
+
+            return new OkResult();
+        }
+
+        //private void Do(DbSet<Account> account, )
 
         //[System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA3001:Review code for SQL injection vulnerabilities", Justification = "<Pending>")]
         public IActionResult SqlTest(string productName, string productCategory)
