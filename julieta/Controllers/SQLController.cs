@@ -106,7 +106,7 @@ namespace julieta.Controllers
             return new OkResult();
         }
 
-        public IActionResult EfCoreInjectionAdvanced(string userInput, int userIdInput, Guid guidInput, string guidStrInput, string ageInput)
+        public IActionResult EfCoreInjectionAdvanced(string userInput, int userIdInput, Guid guidInput, string ageInput)
         {
             int age = 0;
             int.TryParse(ageInput, out age);
@@ -114,9 +114,9 @@ namespace julieta.Controllers
 
             var concatSql = "SELECT * FROM ACCOUNTS WHERE " +
                             "login='" + userInput + "' AND " +
-                            "userId='" + userIdInput + " AND " +
-                            "guid='" + guidStr + "' AND " +
-                            "age=" + age + "";
+                            "userId='" + userIdInput + " AND " + // integer (not vulnerable)
+                            "guid='" + guidStr + "' AND " +      // string from GUID (not vulnerable)
+                            "age=" + age + "";                   // parsed int age from string (not vulnerable) 
             // VULNERABLE: userInput
             _context.Accounts
                 .FromSqlRaw(concatSql);
@@ -124,24 +124,24 @@ namespace julieta.Controllers
             _context.Database
                 .ExecuteSqlRaw(concatSql);
 
-            // use GUID (string), adds a new vuln
-            var formatStringSql = string.Format("SELECT * FROM ACCOUNTS WHERE login = '{0}' AND userId = {1} AND guid='{2}' AND age={3}", userInput, userIdInput, guidStrInput, age);
-            // VULNERABLE: userInput, guidStrInput
+            // use ageInput (string), adds a new vuln (ability to detect both and provide a proper source)
+            var formatStringSql = string.Format("SELECT * FROM ACCOUNTS WHERE login = '{0}' AND userId = {1} AND guid='{2}' AND age='{3}'", userInput, userIdInput, guidInput, ageInput); // userIdInput - int, guidInput - Guid (not vulnerable)
+            // VULNERABLE: userInput, ageInput
             _context.Accounts
                 .FromSqlRaw(formatStringSql);
             // VULNERABLE: userInput, guidStrInput
             _context.Database.ExecuteSqlRaw(formatStringSql);
 
-            // guid validation case
-            // check if it is a valid guid
-            var goodGuid = Guid.TryParse(guidStrInput, out var validGuid);
-            var myNewGuidStr = goodGuid ? guidStrInput : "";
+            // validation case for age - accept only valid ageInput, default to "18"
+            // attempt to confuse a scanner by introducing a new sanitizer/validator
+            var goodAge = int.TryParse(ageInput, out var validAge);
+            var myValidAgeStr = goodAge ? ageInput : "18"; // validated integer age as a string (not vulnerable)
 
-            var interpolatedStringSql = $"SELECT * FROM ACCOUNTS WHERE login = '{userInput}' AND userId = { userIdInput } AND guid = '{myNewGuidStr}' AND age = { age }";
-            // VULNERABLE: userInput
+            var interpolatedStringSql = $"SELECT * FROM ACCOUNTS WHERE userId = { userIdInput } AND guid = '{guidInput}' AND age = '{ myValidAgeStr }'"; // userIdInput - int, guidInput - Guid(not vulnerable)
+            // SAFE
             _context.Accounts
                 .FromSqlRaw(interpolatedStringSql);
-            // VULNERABLE: userInput
+            // SAFE
             _context.Database.ExecuteSqlRaw(interpolatedStringSql);
 
             return new OkResult();
