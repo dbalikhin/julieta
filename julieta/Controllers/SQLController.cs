@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Net;
 using julieta.Data;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -147,42 +144,77 @@ namespace julieta.Controllers
             return new OkResult();
         }
 
-        //private void Do(DbSet<Account> account, )
-
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA3001:Review code for SQL injection vulnerabilities", Justification = "<Pending>")]
-        public IActionResult SqlTest(string productName, string productCategory)
+        
+        
+        public IActionResult SqlClientTest(int productCategoryIdInput, string productCategoryIdStrInput, string productCategoryNameInput)
         {
-            int productNameId = int.Parse(productName);
+            int productCategoryIdParsed = int.Parse(productCategoryIdStrInput);
+            string productCategory = productCategoryIdParsed.ToString();
+
+            string concatSql = "SELECT * FROM Products WHERE ProductCategoryId = '" + productCategoryIdInput +
+                               "' AND ProductCategoryName ='" + productCategoryNameInput + "'";
+
+            string formattedSql =
+                string.Format("SELECT * FROM Products WHERE ProductCategoryId = '{0}' AND ProductCategoryName ='{1}'",
+                    productCategoryIdInput, productCategoryNameInput);
+
+            string interpolatedSql = $"SELECT * FROM Products WHERE ProductCategoryId = '{productCategoryIdInput}' AND ProductCategoryName ='{productCategoryNameInput}'";
+
+            string intStringConversionSql = $"SELECT * FROM Products WHERE ProductCategoryId = '{productCategory}'";
+
+            // in real life, vulnerable fields should be declared as "varchar" in the db, not int
+            string twoVulnsSql = $"SELECT * FROM Products WHERE ProductCategoryId = '{productCategoryIdStrInput}' AND ProductCategoryName ='{productCategoryNameInput}'";
+
             using (SqlConnection connection = new SqlConnection("dummyconnectionstring"))
             {
-                SqlCommand sqlCommand = new SqlCommand()
+                SqlCommand concatSqlCommand = new SqlCommand()
                 {
-                    CommandText = "SELECT ProductId FROM Products WHERE ProductName = '" + productNameId + "' AND ProductCategory ='" + productCategory + "'",
+                    CommandText = concatSql,
                     CommandType = CommandType.Text,
                 };
+                // VULNERABLE: productCategoryNameInput
+                concatSqlCommand.ExecuteReader();
 
-                SqlDataReader reader = sqlCommand.ExecuteReader();
-
-                SqlCommand sqlCommand2 = new SqlCommand()
+                SqlCommand formattedSqlCommand = new SqlCommand()
                 {
-                    CommandText = "SELECT ProductId FROM Products WHERE ProductCategory ='" + productCategory + "'",
+                    CommandText = formattedSql,
                     CommandType = CommandType.Text,
                 };
+                // VULNERABLE: productCategoryNameInput
+                formattedSqlCommand.ExecuteReader();
 
-                SqlDataReader reader2 = sqlCommand2.ExecuteReader();
-
-                SqlCommand sqlCommand3 = new SqlCommand()
+                
+                SqlCommand interpolatedSqlCommand = new SqlCommand()
                 {
-                    CommandText = $"SELECT ProductId FROM Products WHERE ProductCategory ='{productCategory}'",
+                    CommandText = interpolatedSql,
                     CommandType = CommandType.Text,
                 };
+                // VULNERABLE: productCategoryNameInput
+                interpolatedSqlCommand.ExecuteReader();
 
-                SqlDataReader reader3 = sqlCommand2.ExecuteReader();
+                SqlCommand intStringConversionSqlCommand = new SqlCommand()
+                {
+                    CommandText = intStringConversionSql,
+                    CommandType = CommandType.Text,
+                };
+                // SAFE
+                intStringConversionSqlCommand.ExecuteReader();
+
+                SqlCommand twoVulnsSqlCommand = new SqlCommand()
+                {
+                    CommandText = twoVulnsSql,
+                    CommandType = CommandType.Text,
+                };
+                // VULNERABLE: productCategoryIdStrInput and productCategoryNameInput
+                twoVulnsSqlCommand.ExecuteReader();
+
             }
 
             return new OkResult();
         }
 
+
+        /*
         public IActionResult CookieTest()
         {
             Response.Cookies.Append(
@@ -200,6 +232,7 @@ namespace julieta.Controllers
             
             return new OkResult();
         }
+        */
     }
 
 
