@@ -35,7 +35,7 @@ namespace julieta.Controllers
             _context.Database.ExecuteSqlRaw("SELECT * FROM ACCOUNTS WHERE login={0}", user);
 
             // Raw SQL multi line
-            // VULNERABLE?
+            // SAFE
             _context.Accounts
                 .FromSqlRaw(
                     "SELECT * FROM ACCOUNTS WHERE login={0}",
@@ -62,21 +62,22 @@ namespace julieta.Controllers
             var formatStringSql = string.Format("SELECT * FROM ACCOUNTS WHERE login = '{0}'", user);
             _context.Accounts
                 .FromSqlRaw(formatStringSql);
-            // VULNERABLE too
+            // VULNERABLE
             _context.Database.ExecuteSqlRaw(formatStringSql);
 
             // Raw Sql / ExecuteSqlRaw with an interpolated sql str
-            // VULNERABLE?
+            // VULNERABLE
             var interpolatedStringSql = $"SELECT * FROM ACCOUNTS WHERE login = '{user}'";
             _context.Accounts
                 .FromSqlRaw(interpolatedStringSql);
-            // VULNERABLE too
+            // VULNERABLE
             _context.Database.ExecuteSqlRaw(interpolatedStringSql);
 
             // Raw Sql / ExecuteSqlRaw with an interpolated sql str - one-liner
-            // VULNERABLE?
+            // VULNERABLE
             _context.Accounts
                 .FromSqlRaw($"SELECT * FROM ACCOUNTS WHERE login = '{user}'");
+            // VULNERABLE
             _context.Database.ExecuteSqlRaw(interpolatedStringSql);
 
 
@@ -105,35 +106,42 @@ namespace julieta.Controllers
             return new OkResult();
         }
 
-        public IActionResult EfCoreInjectionAdvanced(string user, int userId, Guid guid, string ageInput)
+        public IActionResult EfCoreInjectionAdvanced(string userInput, int userIdInput, Guid guidInput, string guidStrInput, string ageInput)
         {
             int age = 0;
             int.TryParse(ageInput, out age);
-            string guidStr = guid.ToString();
+            string guidStr = guidInput.ToString();
 
             var concatSql = "SELECT * FROM ACCOUNTS WHERE " +
-                            "login='" + user + "' AND " +
-                            "userId='" + userId + " AND " +
+                            "login='" + userInput + "' AND " +
+                            "userId='" + userIdInput + " AND " +
                             "guid='" + guidStr + "' AND " +
                             "age=" + age + "";
-            // VULNERABLE
+            // VULNERABLE: userInput
             _context.Accounts
                 .FromSqlRaw(concatSql);
-            // VULNERABLE
+            // VULNERABLE: userInput
             _context.Database
                 .ExecuteSqlRaw(concatSql);
 
-            var formatStringSql = string.Format("SELECT * FROM ACCOUNTS WHERE login = '{0}' AND userId = {1} AND guid='{2}' AND age={3}", user, userId, guidStr, age);
-            // VULNERABLE
+            // use GUID (string), adds a new vuln
+            var formatStringSql = string.Format("SELECT * FROM ACCOUNTS WHERE login = '{0}' AND userId = {1} AND guid='{2}' AND age={3}", userInput, userIdInput, guidStrInput, age);
+            // VULNERABLE: userInput, guidStrInput
             _context.Accounts
                 .FromSqlRaw(formatStringSql);
-            // VULNERABLE
+            // VULNERABLE: userInput, guidStrInput
             _context.Database.ExecuteSqlRaw(formatStringSql);
 
-            var interpolatedStringSql = $"SELECT* FROM ACCOUNTS WHERE login = '{user}' AND userId = { userId } AND guid = '{guidStr}' AND age = { age }";
+            // guid validation case
+            // check if it is a valid guid
+            var goodGuid = Guid.TryParse(guidStrInput, out var validGuid);
+            var myNewGuidStr = goodGuid ? guidStrInput : "";
+
+            var interpolatedStringSql = $"SELECT * FROM ACCOUNTS WHERE login = '{userInput}' AND userId = { userIdInput } AND guid = '{myNewGuidStr}' AND age = { age }";
+            // VULNERABLE: userInput
             _context.Accounts
                 .FromSqlRaw(interpolatedStringSql);
-            // VULNERABLE too
+            // VULNERABLE: userInput
             _context.Database.ExecuteSqlRaw(interpolatedStringSql);
 
             return new OkResult();
