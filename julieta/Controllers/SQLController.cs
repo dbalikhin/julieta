@@ -147,7 +147,7 @@ namespace julieta.Controllers
 
         
         
-        public IActionResult SqlClientTest(int productCategoryIdInput, string productCategoryIdStrInput, string productCategoryNameInput)
+        public IActionResult SqlClientTest(int productCategoryIdInput, string productCategoryIdStrInput, string productCategoryNameInput, string spNameInput)
         {
             int productCategoryIdParsed = int.Parse(productCategoryIdStrInput);
             string productCategory = productCategoryIdParsed.ToString();
@@ -211,7 +211,17 @@ namespace julieta.Controllers
 
                 // SAFE
                 // Should trigger Roslyn CA2100
-                GetDatatable(connection, productCategoryNameInput, null);
+                var spName = "sp_NormalStuff";
+                GetDatatable(connection, spName, null);
+
+                // VULNERABLE - allow to use any sp
+                GetDatatable(connection, spNameInput, null);
+
+                if (spNameInput == "sp_NormalStuff" || spNameInput == "sp_AlsoNormalStuff")
+                {
+                    // SAFE
+                    GetDatatable(connection, spNameInput, null);
+                }
 
             }
 
