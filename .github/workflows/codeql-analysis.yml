@@ -72,6 +72,6 @@ jobs:
       
     - name: Get version
       id: vars
-      run: echo ::set-output name=version::$(cat VERSION)
+      run: echo ::set-output name=sariffile::$(cat /home/runner/work/julieta/results/csharp.sarif)
     - name: Test output
-      run: echo /home/runner/work/julieta/results/csharp.sarif
+      run: echo ${{ steps.vars.outputs.sariffile }}
