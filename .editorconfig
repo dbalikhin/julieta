@@ -5,3 +5,6 @@ dotnet_diagnostic.CA2100.severity = warning
 
 # CA3001: Review code for SQL injection vulnerabilities
 dotnet_diagnostic.CA3001.severity = warning
+
+# CA3008: Review code for XPath injection vulnerabilities
+dotnet_diagnostic.CA3008.severity = warning
