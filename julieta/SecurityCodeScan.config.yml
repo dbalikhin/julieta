@@ -1,0 +1,6 @@
+﻿Version: 3.1
+
+Transfers:
+  - Type: julieta.Controllers.XPathController
+    Methods:
+      - Name: ValidateInputParameters

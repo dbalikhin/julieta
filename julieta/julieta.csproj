@@ -2,7 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <CodeAnalysisRuleSet>..\.sonarlint\dbalikhin_julietacsharp.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="SecurityCodeScan.config.yml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="SecurityCodeScan.config.yml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\.sonarlint\dbalikhin_julieta\CSharp\SonarLint.xml" Link="SonarLint.xml" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
