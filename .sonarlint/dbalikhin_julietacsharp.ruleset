@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <RuleSet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="SonarQube - julieta Sonar Security way" Description="This rule set was automatically generated from SonarQube https://sonarcloud.io/profiles/show?key=AXxhb_mpC4WGRonYlZ54" ToolsVersion="14.0">
   <Rules AnalyzerId="SonarAnalyzer.CSharp" RuleNamespace="SonarAnalyzer.CSharp">
     <Rule Id="S100" Action="None" />
@@ -364,5 +364,8 @@
     <Rule Id="S881" Action="None" />
     <Rule Id="S907" Action="None" />
     <Rule Id="S927" Action="None" />
+  </Rules>
+  <Rules AnalyzerId="Microsoft.CodeAnalysis.NetAnalyzers" RuleNamespace="Microsoft.CodeAnalysis.NetAnalyzers">
+    <Rule Id="CA5394" Action="Warning" />
   </Rules>
 </RuleSet>
