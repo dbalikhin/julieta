@@ -1,0 +1,827 @@
+{
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "SCS0002",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL injection vulnerability was found where 'sql' in 'IQueryable<Account> RelationalQueryableExtensions.FromSqlRaw<Account>(DbSet<Account> source, string sql, params object[] parameters)' may be tainted by user-controlled data from 'string user' in method 'IActionResult SQLController.EfCoreInjectionBasic(string user)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 54,
+                  "startColumn": 29,
+                  "endLine": 54,
+                  "endColumn": 38
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 51,
+                  "endLine": 24,
+                  "endColumn": 62
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "SCS0002",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL injection vulnerability was found where 'sql' in 'IQueryable<Account> RelationalQueryableExtensions.FromSqlRaw<Account>(DbSet<Account> source, string sql, params object[] parameters)' may be tainted by user-controlled data from 'string userInput' in method 'IActionResult SQLController.EfCoreInjectionAdvanced(string userInput, int userIdInput, Guid guidInput, string ageInput)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 120,
+                  "startColumn": 29,
+                  "endLine": 120,
+                  "endColumn": 38
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 107,
+                  "startColumn": 54,
+                  "endLine": 107,
+                  "endColumn": 70
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "SCS0002",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL injection vulnerability was found where 'sql' in 'int RelationalDatabaseFacadeExtensions.ExecuteSqlRaw(DatabaseFacade databaseFacade, string sql, params object[] parameters)' may be tainted by user-controlled data from 'string user' in method 'IActionResult SQLController.EfCoreInjectionBasic(string user)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 56,
+                  "startColumn": 45,
+                  "endLine": 56,
+                  "endColumn": 54
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 51,
+                  "endLine": 24,
+                  "endColumn": 62
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "SCS0002",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL injection vulnerability was found where 'sql' in 'int RelationalDatabaseFacadeExtensions.ExecuteSqlRaw(DatabaseFacade databaseFacade, string sql, params object[] parameters)' may be tainted by user-controlled data from 'string userInput' in method 'IActionResult SQLController.EfCoreInjectionAdvanced(string userInput, int userIdInput, Guid guidInput, string ageInput)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 123,
+                  "startColumn": 32,
+                  "endLine": 123,
+                  "endColumn": 41
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 107,
+                  "startColumn": 54,
+                  "endLine": 107,
+                  "endColumn": 70
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "SCS0002",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL injection vulnerability was found where 'sql' in 'IQueryable<Account> RelationalQueryableExtensions.FromSqlRaw<Account>(DbSet<Account> source, string sql, params object[] parameters)' may be tainted by user-controlled data from 'string user' in method 'IActionResult SQLController.EfCoreInjectionBasic(string user)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 62,
+                  "startColumn": 29,
+                  "endLine": 62,
+                  "endColumn": 44
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 51,
+                  "endLine": 24,
+                  "endColumn": 62
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "SCS0002",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL injection vulnerability was found where 'sql' in 'IQueryable<Account> RelationalQueryableExtensions.FromSqlRaw<Account>(DbSet<Account> source, string sql, params object[] parameters)' may be tainted by user-controlled data from 'string userInput' in method 'IActionResult SQLController.EfCoreInjectionAdvanced(string userInput, int userIdInput, Guid guidInput, string ageInput)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 129,
+                  "startColumn": 29,
+                  "endLine": 129,
+                  "endColumn": 44
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 107,
+                  "startColumn": 54,
+                  "endLine": 107,
+                  "endColumn": 70
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "SCS0002",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL injection vulnerability was found where 'sql' in 'int RelationalDatabaseFacadeExtensions.ExecuteSqlRaw(DatabaseFacade databaseFacade, string sql, params object[] parameters)' may be tainted by user-controlled data from 'string user' in method 'IActionResult SQLController.EfCoreInjectionBasic(string user)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 64,
+                  "startColumn": 45,
+                  "endLine": 64,
+                  "endColumn": 60
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 51,
+                  "endLine": 24,
+                  "endColumn": 62
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "SCS0002",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL injection vulnerability was found where 'sql' in 'IQueryable<Account> RelationalQueryableExtensions.FromSqlRaw<Account>(DbSet<Account> source, string sql, params object[] parameters)' may be tainted by user-controlled data from 'string ageInput' in method 'IActionResult SQLController.EfCoreInjectionAdvanced(string userInput, int userIdInput, Guid guidInput, string ageInput)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 129,
+                  "startColumn": 29,
+                  "endLine": 129,
+                  "endColumn": 44
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 107,
+                  "startColumn": 105,
+                  "endLine": 107,
+                  "endColumn": 120
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "SCS0002",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL injection vulnerability was found where 'sql' in 'IQueryable<Account> RelationalQueryableExtensions.FromSqlRaw<Account>(DbSet<Account> source, string sql, params object[] parameters)' may be tainted by user-controlled data from 'string user' in method 'IActionResult SQLController.EfCoreInjectionBasic(string user)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 70,
+                  "startColumn": 29,
+                  "endLine": 70,
+                  "endColumn": 50
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 51,
+                  "endLine": 24,
+                  "endColumn": 62
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "SCS0002",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL injection vulnerability was found where 'sql' in 'int RelationalDatabaseFacadeExtensions.ExecuteSqlRaw(DatabaseFacade databaseFacade, string sql, params object[] parameters)' may be tainted by user-controlled data from 'string userInput' in method 'IActionResult SQLController.EfCoreInjectionAdvanced(string userInput, int userIdInput, Guid guidInput, string ageInput)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 131,
+                  "startColumn": 45,
+                  "endLine": 131,
+                  "endColumn": 60
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 107,
+                  "startColumn": 54,
+                  "endLine": 107,
+                  "endColumn": 70
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "SCS0002",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL injection vulnerability was found where 'sql' in 'int RelationalDatabaseFacadeExtensions.ExecuteSqlRaw(DatabaseFacade databaseFacade, string sql, params object[] parameters)' may be tainted by user-controlled data from 'string user' in method 'IActionResult SQLController.EfCoreInjectionBasic(string user)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 72,
+                  "startColumn": 45,
+                  "endLine": 72,
+                  "endColumn": 66
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 51,
+                  "endLine": 24,
+                  "endColumn": 62
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "SCS0002",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL injection vulnerability was found where 'sql' in 'int RelationalDatabaseFacadeExtensions.ExecuteSqlRaw(DatabaseFacade databaseFacade, string sql, params object[] parameters)' may be tainted by user-controlled data from 'string ageInput' in method 'IActionResult SQLController.EfCoreInjectionAdvanced(string userInput, int userIdInput, Guid guidInput, string ageInput)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 131,
+                  "startColumn": 45,
+                  "endLine": 131,
+                  "endColumn": 60
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 107,
+                  "startColumn": 105,
+                  "endLine": 107,
+                  "endColumn": 120
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "SCS0002",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL injection vulnerability was found where 'sql' in 'IQueryable<Account> RelationalQueryableExtensions.FromSqlRaw<Account>(DbSet<Account> source, string sql, params object[] parameters)' may be tainted by user-controlled data from 'string user' in method 'IActionResult SQLController.EfCoreInjectionBasic(string user)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 77,
+                  "startColumn": 29,
+                  "endLine": 77,
+                  "endColumn": 77
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 51,
+                  "endLine": 24,
+                  "endColumn": 62
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "SCS0002",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL injection vulnerability was found where 'sql' in 'int RelationalDatabaseFacadeExtensions.ExecuteSqlRaw(DatabaseFacade databaseFacade, string sql, params object[] parameters)' may be tainted by user-controlled data from 'string user' in method 'IActionResult SQLController.EfCoreInjectionBasic(string user)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 79,
+                  "startColumn": 45,
+                  "endLine": 79,
+                  "endColumn": 66
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 51,
+                  "endLine": 24,
+                  "endColumn": 62
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "SCS0002",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL injection vulnerability was found where 'CommandText' in 'SqlCommand' may be tainted by user-controlled data from 'string productCategoryNameInput' in method 'IActionResult SQLController.SqlClientTest(int productCategoryIdInput, string productCategoryIdStrInput, string productCategoryNameInput, string spNameInput)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 173,
+                  "startColumn": 21,
+                  "endLine": 173,
+                  "endColumn": 32
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 150,
+                  "startColumn": 106,
+                  "endLine": 150,
+                  "endColumn": 137
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "SCS0002",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL injection vulnerability was found where 'CommandText' in 'SqlCommand' may be tainted by user-controlled data from 'string productCategoryNameInput' in method 'IActionResult SQLController.SqlClientTest(int productCategoryIdInput, string productCategoryIdStrInput, string productCategoryNameInput, string spNameInput)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 181,
+                  "startColumn": 21,
+                  "endLine": 181,
+                  "endColumn": 32
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 150,
+                  "startColumn": 106,
+                  "endLine": 150,
+                  "endColumn": 137
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "SCS0002",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL injection vulnerability was found where 'CommandText' in 'SqlCommand' may be tainted by user-controlled data from 'string productCategoryIdStrInput' in method 'IActionResult SQLController.SqlClientTest(int productCategoryIdInput, string productCategoryIdStrInput, string productCategoryNameInput, string spNameInput)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 206,
+                  "startColumn": 21,
+                  "endLine": 206,
+                  "endColumn": 32
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 150,
+                  "startColumn": 72,
+                  "endLine": 150,
+                  "endColumn": 104
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "SCS0002",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL injection vulnerability was found where 'CommandText' in 'SqlCommand' may be tainted by user-controlled data from 'string productCategoryNameInput' in method 'IActionResult SQLController.SqlClientTest(int productCategoryIdInput, string productCategoryIdStrInput, string productCategoryNameInput, string spNameInput)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 206,
+                  "startColumn": 21,
+                  "endLine": 206,
+                  "endColumn": 32
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 150,
+                  "startColumn": 106,
+                  "endLine": 150,
+                  "endColumn": 137
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "SCS0002",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Potential SQL injection vulnerability was found where 'CommandText' in 'SqlCommand' may be tainted by user-controlled data from 'string spNameInput' in method 'IActionResult SQLController.SqlClientTest(int productCategoryIdInput, string productCategoryIdStrInput, string productCategoryNameInput, string spNameInput)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 236,
+                  "startColumn": 13,
+                  "endLine": 236,
+                  "endColumn": 28
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 150,
+                  "startColumn": 139,
+                  "endLine": 150,
+                  "endColumn": 157
+                }
+              }
+            },
+			{
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/gh/julieta-main/julieta/Controllers/SQLController.cs"
+                },
+                "region": {
+                  "startLine": 218,
+                  "startColumn": 17,
+                  "endLine": 218,
+                  "endColumn": 72
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "Security Code Scan",
+          "version": "5.2.2.0",
+          "dottedQuadFileVersion": "5.2.2.0",
+          "semanticVersion": "5.2.2",
+          "language": "en-CA",
+          "rules": [
+            {
+              "id": "SCS0002",
+              "shortDescription": {
+                "text": "Potential SQL injection vulnerability was found where '{0}' in '{1}' may be tainted by user-controlled data from '{2}' in method '{3}'."
+              },
+              "fullDescription": {
+                "text": "The untrusted value passed to the SQL query should be validated."
+              },
+              "helpUri": "https://security-code-scan.github.io/#SCS0002",
+              "properties": {
+                "category": "Security"
+              }
+            }
+          ]
+        }
+      },
+      "columnKind": "utf16CodeUnits"
+    }
+  ]
+}
