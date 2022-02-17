@@ -22,7 +22,7 @@ namespace julieta.Controllers
             // An attacker can bypass authentication by setting user to this special value
             // user = "' or 1=1 or ''='";
 
-            return Content(doc.SelectSingleNode(expression) != null ? "success" : "fail"); // Noncompliant
+            return Content(doc.SelectSingleNode(expression) != null ? "success" : "fail"); // Noncompliant 
         }
 
         public ActionResult SampleSonar2(string user, string pass)
@@ -71,7 +71,7 @@ namespace julieta.Controllers
             Regex rgx = new Regex(@"^[a-zA-Z0-9]+$");
             if (rgx.IsMatch(input)) //Additional validation
             {
-                XmlDocument doc = new XmlDocument { XmlResolver = null };
+                XmlDocument doc = new XmlDocument { XmlResolver = null }; ;
                 doc.Load("/config.xml");
                 var results = doc.SelectNodes("/Config/Devices/Device[id='" + input + "']");
             }
