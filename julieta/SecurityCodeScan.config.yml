@@ -1,0 +1,9 @@
+﻿Version: 3.1
+
+Sanitizers:
+  - Type: julieta.Controllers.XPathController
+    TaintTypes:
+      - SCS0003
+    Methods:
+      - Name: ValidateInputParameters
+        CleansInstance: True

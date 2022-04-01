@@ -8,3 +8,5 @@
 
 # CA3008: Review code for XPath injection vulnerabilities
 #dotnet_diagnostic.CA3008.severity = warning
+
+dotnet_analyzer_diagnostic.category-Security.severity = warning
